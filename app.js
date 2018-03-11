@@ -1,6 +1,9 @@
 var restify = require('restify');
 var builder = require('botbuilder');
 
+const args = process.argv;
+console.log(process.argv);
+
 // Setup Restify Server
 var server = restify.createServer();
 server.listen(process.env.port || process.env.PORT || 3978, function () {
@@ -9,8 +12,8 @@ server.listen(process.env.port || process.env.PORT || 3978, function () {
 
 // Create chat connector for communicating with the Bot Framework Service
 var connector = new builder.ChatConnector({
-    appId: process.env.MicrosoftAppId,
-    appPassword: process.env.MicrosoftAppPassword
+    appId: process.env.MicrosoftAppId || process.argv[2],
+    appPassword: process.env.MicrosoftAppPassword || process.argv[3]
 });
 
 // Listen for messages from users 
